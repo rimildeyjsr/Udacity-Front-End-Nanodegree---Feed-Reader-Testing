@@ -46,15 +46,15 @@ $(function() {
         });
     });
 
-
+    //menu test suite
     describe('The Menu',function(){
-
+        //checks if the menu is hidden by default
         it('hidden menu by default', function(){
 
             expect($('body').hasClass('menu-hidden')).toBe(true);
         });
 
-
+        //checks if the visibility of the menu is being toggled on click
         it('toggles visibility on click', function(){
             $('.menu-icon-link').click();
             expect($('body').hasClass('menu-hidden')).toBe(false);
@@ -65,25 +65,28 @@ $(function() {
         });
     });
 
+    //initial entries test suite
     describe('Initial Entries', function(){
 
         beforeEach(function(done){
             loadFeed(0,done);
         });
-
+        //checks if there is even a single entry in the news feed
         it('has single entry', function(done){
             expect($('.feed .entry').length > 0).toBe(true);
             done();
         });
     });
 
-
+    //news feed selection test suite
     describe('New Feed Selection',function(){
         var $feed,$newsfeed;
         beforeEach(function(done){
+            //loads the first feed and stores it in $feed
             loadFeed(0, function(){
                 $feed = $('.header-title').html();
                 loadFeed(1, function(){
+                    //loads another feed and stores it in $newfeed
                     $newfeed = $('.header-title').html();
                     done();
                 });
@@ -91,11 +94,10 @@ $(function() {
         });
 
         it('different feeds on reload', function(done){
+            //checks if the new feed is equal to the old feed
             expect($feed).not.toEqual($newfeed);
             done();
         });
 
     });
-
-
 }());
